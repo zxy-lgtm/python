@@ -3,6 +3,7 @@ import sys
 import pygame
 import settings
 from ship import Ship
+import game_functions as gf
 def run_game():
     #initialize game and create a dispaly object
     pygame.init()
@@ -12,21 +13,16 @@ def run_game():
 
 
     #创建一艘飞船
-    ship = Ship(screen)
+    ship = Ship(ai_settings,screen)
 
 
 
     # game loop
     while True:
         # supervise keyboard and mouse item
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
+        gf.check_events(ship)
+        ship.update()
+        gf.update_screen(ai_settings,screen,ship)
 
-        # fill color
-        screen.fill(ai_settings.bg_color)
-        ship.blitme()
 
-        # visualiaze the window
-        pygame.display.flip()
 run_game()
