@@ -30,7 +30,7 @@ class Ship():
         self.moving_left = False
 
         #飞船设置
-        self.ai_settings.ship_speed_factor = 1.5
+        self.ai_settings.ship_speed_factor = ai_settings.ship_speed_factor
 
     
     def update(self):

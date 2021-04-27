@@ -7,6 +7,7 @@ import pygame
 from alien import Alien
 
 from bullet import Bullet
+from time import sleep
 
 
 def check_keydown_events(event,ai_settings,screen,ship,bullets):
@@ -67,7 +68,7 @@ def update_screen(ai_settings,screen,ship,aliens,bullets):
     # visualiaze the window
     pygame.display.flip()
 
-def update_bullets(bullets):
+def update_bullets(aliens,bullets):
 
     bullets.update()
 
@@ -76,9 +77,15 @@ def update_bullets(bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-def update_aliens(ai_settings,aliens):
+    collisions = pygame.sprite.groupcollide(bullets,aliens,True,True)
+
+def update_aliens(ai_settings,ship,aliens):
     check_fleet_edges(ai_settings,aliens)
     aliens.update()
+
+    #检测外星人和飞船之间的碰撞
+    if pygame.sprite.spritecollideany(ship,aliens):
+        print("Ship hit!!")
 
 def get_number_alien_x(ai_settings,alien_width):
     available_space_x = ai_settings.screen_width - 2*alien_width
@@ -108,3 +115,6 @@ def create_fleet(ai_settings,screen,ship,aliens):
     for row_number in range(number_rows):
         for alien_number in range(number_aliens_x):
             create_alien(ai_settings,screen,aliens,alien_number,row_number)
+
+def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
+    stats.ships_left
