@@ -12,7 +12,7 @@ class Ship():
         self.image = pygame.image.load('images/ship.bmp')
 
         #将图片缩小
-        self.image = pygame.transform.scale(self.image,(30,30))
+        self.image = pygame.transform.scale(self.image,(50,50))
 
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
